@@ -1,9 +1,15 @@
+import argparse
+
 # A dictionary to count failures and successes per IP
 failures = {}
 successes = {}
 
-# Open the log file and go through it one line at a time
-with open("auth.log") as file:
+parser = argparse.ArgumentParser()
+parser.add_argument("log_file", nargs="?", default="auth.log")
+args = parser.parse_args()
+
+# Open the selected log file and go through it one line at a time
+with open(args.log_file) as file:
     for line in file:
         # Get the IP from the last word on the line
         ip = line.strip().split()[-1]
